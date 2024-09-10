@@ -1,5 +1,10 @@
 package com.example.materialcalculator.domain
 
+/**
+ * expression: term | term + term | term - term
+ * term:       factor | factor * factor | factor / factor
+ * factor:     number | (expression) | + factor | - factor
+ */
 class ExpressionEvaluator(
     private val expression: List<ExpressionPart>
 ) {
@@ -32,7 +37,7 @@ class ExpressionEvaluator(
     }
 
     private fun evalTerm(expression: List<ExpressionPart>): ExpressionResult {
-        var result = evalFactor(expression)
+        val result = evalFactor(expression)
         var remaining = result.remainingExpression
         var sum = result.value
         while (true) {
@@ -57,7 +62,9 @@ class ExpressionEvaluator(
     private fun evalFactor(expression: List<ExpressionPart>): ExpressionResult {
         return when (val part = expression.firstOrNull()) {
             ExpressionPart.Op(Operation.ADD) -> {
-                evalFactor(expression.drop(1))
+                evalFactor(expression.drop(1)).run {
+                    ExpressionResult(remainingExpression, value)
+                }
             }
 
             ExpressionPart.Op(Operation.SUBTRACT) -> {
