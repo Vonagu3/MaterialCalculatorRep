@@ -19,6 +19,11 @@ val calculatorActions = listOf(
         action = CalculatorAction.Parentheses
     ),
     CalculatorUiAction(
+        text = "%",
+        highlightLevel = HighlightLevel.SemiHighlighted,
+        action = CalculatorAction.Op(Operation.PERCENT)
+    ),
+    CalculatorUiAction(
         text = "÷",
         highlightLevel = HighlightLevel.SemiHighlighted,
         action = CalculatorAction.Op(Operation.DIVIDE)
