@@ -4,7 +4,8 @@ enum class Operation(val symbol: Char) {
     ADD('+'),
     SUBTRACT('-'),
     MULTIPLY('x'),
-    DIVIDE('/')
+    DIVIDE('/'),
+    PERCENT('%')
 }
 
 val operationSymbols = Operation.entries.map { it.symbol }.joinToString("")
